@@ -5,6 +5,15 @@ class User:
         self.name = name
         self.email = email
 
+    def __comparable(self):
+        return {key : value.lower() for key, value in self.__dict__.items()}
+
+    def __eq__(self, other):
+        return self.__comparable() == other.__comparable()
+
+    def __ne__(self, other):
+        return self.__comparable == other.__comparable
+
     def activate(self):
         if self not in self.__class__.active_users:
             self.__class__.active_users.append(self)
